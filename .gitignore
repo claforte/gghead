@@ -10,3 +10,6 @@ _pycache__
 *.egg-info
 /docs/build/
 dist
+data/models/gghead
+data/models/gghead_models.zip
+output/sampled_heads

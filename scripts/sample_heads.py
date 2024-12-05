@@ -1,6 +1,8 @@
 from typing import Optional
 
-import mediapy
+#import mediapy
+import imageio
+
 import numpy as np
 import torch
 import tyro
@@ -69,7 +71,8 @@ def main(run_name: str,
                 all_frames.extend(frames)
             output_folder = f"{GGHEAD_RENDERINGS_PATH}/sampled_heads/{run_name}"
             ensure_directory_exists(output_folder)
-            mediapy.write_video(f"{output_folder}/{seed:04d}.mp4", all_frames, fps=24)
+            imageio.mimsave(f"{output_folder}/{seed:04d}.mp4", all_frames, fps=24, codec='libx264')
+            #mediapy.write_video(f"{output_folder}/{seed:04d}.mp4", all_frames, fps=24, codec="libx264")
 
 
 if __name__ == '__main__':

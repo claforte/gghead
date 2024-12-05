@@ -97,10 +97,10 @@ class GGHeadConfig(Config):
     w_dim: int = 512
     c_dim: int = implicit(default=25)
     # img_resolution: int
-    mapping_network_config: MappingNetworkConfig = MappingNetworkConfig()
-    synthesis_network_config: SynthesisNetworkConfig = SynthesisNetworkConfig()
-    rendering_config: RenderingConfig = RenderingConfig()
-    super_resolution_config: SuperResolutionConfig = SuperResolutionConfig()
+    mapping_network_config: MappingNetworkConfig = field(default_factory=MappingNetworkConfig)
+    synthesis_network_config: SynthesisNetworkConfig = field(default_factory=SynthesisNetworkConfig)
+    rendering_config: RenderingConfig = field(default_factory=RenderingConfig)
+    super_resolution_config: SuperResolutionConfig = field(default_factory=SuperResolutionConfig)
 
     uv_attributes: List[GaussianAttribute] = field(default_factory=lambda: [
         GaussianAttribute.POSITION])  # Which attributes should be predicted in UV space
@@ -156,7 +156,7 @@ class GGHeadConfig(Config):
     opacity_overshoot: float = 0  # Avoid having to predict ridiculously large opacities to saturate sigmoid
     clamp_opacity: bool = False
     use_optimizable_gaussian_attributes: bool = False  # For debugging: Gaussians are directly learnable instead of building them from predicted UV / TriPlanes
-    gaussian_attribute_config: GaussianAttributeConfig = GaussianAttributeConfig()
+    gaussian_attribute_config: GaussianAttributeConfig = field(default_factory=GaussianAttributeConfig)
     use_zero_conv_position: bool = False
     use_zero_conv_scale: bool = False
     use_density_map: bool = False
@@ -243,10 +243,10 @@ class GGHeadConfig(Config):
     @staticmethod
     def default() -> 'GGHeadConfig':
         config = GGHeadConfig(512, 512,
-                                                 mapping_network_config=MappingNetworkConfig(),
-                                                 synthesis_network_config=SynthesisNetworkConfig(),
-                                                 rendering_config=RenderingConfig(),
-                                                 use_flame_to_bfm_registration=True)
+                            mapping_network_config=field(default_factory=MappingNetworkConfig),
+                            synthesis_network_config=field(default_factory=SynthesisNetworkConfig),
+                            rendering_config=field(default_factory=RenderingConfig),
+                            use_flame_to_bfm_registration=True)
         config.c_dim = 25
         return config
 

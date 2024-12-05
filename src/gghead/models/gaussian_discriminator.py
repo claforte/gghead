@@ -30,8 +30,8 @@ class DiscriminatorEpilogueConfig(Config):
 @dataclass
 class GaussianDiscriminatorConfig(Config):
     mapping_network_config: MappingNetworkConfig
-    block_config: DiscriminatorBlockConfig = DiscriminatorBlockConfig()
-    epilogue_config: DiscriminatorEpilogueConfig = DiscriminatorEpilogueConfig()
+    block_config: DiscriminatorBlockConfig = field(default_factory=DiscriminatorBlockConfig)
+    epilogue_config: DiscriminatorEpilogueConfig = field(default_factory=DiscriminatorEpilogueConfig)
 
     architecture: Literal['orig', 'skip', 'resnet'] = 'resnet'  # Architecture: 'orig', 'skip', 'resnet'.
     channel_base: int = 32768  # Overall multiplier for the number of channels.

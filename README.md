@@ -12,6 +12,7 @@ and [Matthias Nießner](https://www.niessnerlab.org/)
 
 ## 1.1. Dependencies
 
+0. Install micromamba (or `module load micromamba`) since conda is ridiculously slow.
 1. Create conda environment `gghead` with newest PyTorch and CUDA 11.8:
     ```bash
     conda env create -f environment.yml
@@ -20,7 +21,7 @@ and [Matthias Nießner](https://www.niessnerlab.org/)
     1. *[Linux]*
         ```bash
         conda activate gghead
-        conda env config vars set CUDA_HOME=$CONDA_PREFIX
+        #conda env config vars set CUDA_HOME=$CONDA_PREFIX # claforte: skipped, didn't work, CONDA_PREFIX undefined
         conda activate base
         conda activate gghead
         ```
